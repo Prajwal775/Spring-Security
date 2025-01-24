@@ -2,6 +2,8 @@ package com.security.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +25,7 @@ public class AppConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder().username("piyush").password(passwordEncoder().encode("abc")).roles("admin").build();
-        UserDetails user1 = User.builder().username("prajwal").password(passwordEncoder().encode("xyz")).roles("admin").build();
+        UserDetails user1 = User.builder().username("prajwal").password(passwordEncoder().encode("abc123")).roles("admin").build();
         return new InMemoryUserDetailsManager(user,user1);
     }
 
@@ -33,4 +35,9 @@ public class AppConfig {
     }
 
 
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
+    }
 }

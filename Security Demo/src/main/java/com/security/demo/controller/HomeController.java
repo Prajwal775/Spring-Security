@@ -18,6 +18,9 @@ public class HomeController {
 
     @GetMapping("/user")
     public List<User> getUsers(){
+
         return userService.getUsers();
     }
+
+
 }
